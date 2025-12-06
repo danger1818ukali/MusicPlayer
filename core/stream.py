@@ -30,7 +30,6 @@ from pytgcalls.types import AudioQuality, VideoQuality
 from pyrogram.raw.functions.phone import CreateGroupCall
 from pytgcalls.exceptions import NoActiveGroupCall
 
-
 safone = {}
 ydl_opts = {
     "quiet": True,
@@ -61,7 +60,7 @@ async def start_stream(song: Song, lang):
             chat.id,
             get_quality(song),
         )
-    except (NoActiveGroupCall, GroupCallNotFound):
+    except NoActiveGroupCall:
         peer = await app.resolve_peer(chat.id)
         await app.invoke(
             CreateGroupCall(
